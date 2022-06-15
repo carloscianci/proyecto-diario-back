@@ -2,11 +2,26 @@ const Noticia = require('../model/noticias')
 
 const getNoticias = async(req, res) => {
     try {
-        const listaNotiias = await Noticia.find().sort({ idtiponoticia: 1, titulo: 1} )
+        const listaNoticias = await Noticia.find().sort({ idtiponoticia: 1, titulo: 1} )
         res.json({
-            listaNotiias
+            listaNoticias
         })
         
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+const getUnaNoticia = async(req, res) => {
+    const { idnoticia } = req.body 
+    try {
+        const unaNoticia = await Noticia.findById(idnoticia) 
+        const mensaje = (unaNoticia) ? "Noticia obtenida con éxito." : "La noticia seleecionada no existe"
+        
+        res.json({
+            message: mensaje,
+            unaNoticia
+        })
     } catch (error) {
         console.error(error)
     }
@@ -81,4 +96,4 @@ const modificarNoticia = async(req, res) => {
     }
 }
 
-module.exports = { getNoticias, crearNoticia, borrarNoticia, modificarNoticia }
+module.exports = { getNoticias, crearNoticia, borrarNoticia, modificarNoticia, getUnaNoticia }

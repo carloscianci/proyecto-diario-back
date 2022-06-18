@@ -8,8 +8,10 @@ app.use(express.json())
 app.use(express.urlencoded())
 
 const noticia = require('./routes/noticias')
+const suscripcion = require('./routes/suscripcion')
 
 app.use('/noticia', noticia)
+app.use('/suscripcion', suscripcion)
 
 
 app.listen(port,() => {

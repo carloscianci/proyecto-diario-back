@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const { getSuscripcion, crearSuscripcion, borrarSuscripcion, modificarSuscripcion} = require('../controller/suscripcion')
+const { getSuscripcion, crearSuscripcion, borrarSuscripcion, modificarSuscripcion, login} = require('../controller/suscripcion')
 
 router
     .get('/', getSuscripcion )

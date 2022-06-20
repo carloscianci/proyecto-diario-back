@@ -5,8 +5,8 @@ const { getNoticias, crearNoticia, borrarNoticia, modificarNoticia, getUnaNotici
 const { jwtValidator } = require('../middleware/jwtvalidator')
 
 router
-    .get('/', jwtValidator, getNoticias )
-    .get('/getUna', jwtValidator, getUnaNoticia)
+    .get('/', getNoticias )
+    .get('/getUna', getUnaNoticia)
     .post('/', jwtValidator, crearNoticia)
     .delete('/', jwtValidator, borrarNoticia)
     .put('/', jwtValidator, modificarNoticia)

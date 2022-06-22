@@ -7,19 +7,19 @@ const jwtValidator = async(req, res, next) => {
     const secretKey = process.env.SECRET_KEY
 
     try {
-        console.log(access_token)
-        console.log(secretKey)
         const verificacion = jwt.verify(access_token, secretKey)
-        console.log(verificacion)
+
         if(verificacion) {
             return next()
         }
 
         return res.json({
+            resultado : true,
             message : 'Token invalido'
         })
     } catch (error) {
         return res.json({
+            resultado : false,
             message : 'ERROR!!! No se pudo validar el Token'
         })        
     }

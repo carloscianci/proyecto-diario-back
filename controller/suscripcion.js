@@ -7,6 +7,7 @@ const getSuscripcion = async(req, res) => {
         const mensaje = (unaSuscripcion) ? "Suscripción obtenida con éxito." : "La suscripción seleecionada no existe"
         
         res.json({
+            resultado : true,
             message: mensaje,
             unaSuscripcion
         })
@@ -33,10 +34,12 @@ const crearSuscripcion = async(req, res) => {
             await nuevaSuscripcion.save()
     
             res.json({
+                resultado : true,
                 message: 'Suscripcion creada exitosamente.'
             })
         } else {
             res.json({
+                resultado : false,
                 message: `ATENCION!!! Ya existe un usuario suscripto con el mail ${email}.`
             })
         }
@@ -53,10 +56,12 @@ const borrarSuscripcion = async(req, res) => {
         
         if(resultado) {
             res.json({
+                resultado : true,
                 message: `La suscripción ${idsuscripcion} fue eliminada.`
             })
         } else {
             res.json({
+                resultado : false,
                 message: `ERROR!!! No se encontró la suscripción ${idsuscripcion}.`
             })
         }
@@ -78,10 +83,12 @@ const modificarSuscripcion = async(req, res) => {
         
         if(resultado) {
             res.json({
+                resultado : true,
                 message: `La suscripción ${idsuscripcion} se actualicó con éxito.`
             })
         } else {
             res.json({
+                resultado : false,
                 message: `ERROR!!! No se encontró la suscripción ${idsuscripcion}.`
             })
         }

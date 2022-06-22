@@ -10,6 +10,7 @@ const getUsuario = async(req, res) => {
         const mensaje = (unUsuario) ? "Usuario obtenido con éxito." : "El usuario solicitado no existe"
         
         res.json({
+            resultado : true,
             message: mensaje,
             unUsuario
         })
@@ -38,10 +39,12 @@ const crearUsuario = async(req, res) => {
             await nuevoUsuario.save()
     
             res.json({
+                resultado : true,
                 message: 'Usuario creado exitosamente.'
             })
         } else {
             res.json({
+                resultado : false,
                 message: `ATENCION!!! Ya existe un usuario con el mail ${email}.`
             })
         }
@@ -58,10 +61,12 @@ const borrarUsuario = async(req, res) => {
         
         if(resultado) {
             res.json({
+                resultado : true,
                 message: `El usuario ${idusuario} fue eliminado.`
             })
         } else {
             res.json({
+                resultado : false,
                 message: `ERROR!!! No se encontró el usuario ${idusuario}.`
             })
         }
@@ -85,10 +90,12 @@ const modificarUsuario = async(req, res) => {
         
         if(resultado) {
             res.json({
+                resultado : true,
                 message: `El usuario ${idusuario} se actualicó con éxito.`
             })
         } else {
             res.json({
+                resultado : false,
                 message: `ERROR!!! No se encontró el usuario ${idusuario}.`
             })
         }
@@ -110,16 +117,19 @@ const login = async(req, res) => {
                 const secretKey = process.env.SECRET_KEY
                 const token = jwt.sign({user},secretKey,{expiresIn : '1h'})
                 res.json({
-                    message: 'Usuario creado exitosamente.',
+                    resultado: true,
+                    message: 'Usuario logueado exitosamente.',
                     token
                 })
             } else {
                 res.json({
+                    resultado : false,
                     message: 'ERROR!!! Usuario o contraseña incorrecta.'
                 })    
             }
         } else {
             res.json({
+                resultado: false,
                 message: 'ERROR!!! Usuario o contraseña incorrecta.'
             })
         }

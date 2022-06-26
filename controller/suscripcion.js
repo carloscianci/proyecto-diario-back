@@ -1,5 +1,18 @@
 const Suscripcion = require('../model/suscripcion')
 
+const getSuscripciones = async(req, res) => {
+    try {
+        const listaSuscripciones = await Suscripcion.find().sort({ apellido: 1, nombre: 1} )
+        res.json({
+            resultado : true,
+            listaSuscripciones
+        })
+        
+    } catch (error) {
+        console.error(error)
+    }
+}
+
 const getSuscripcion = async(req, res) => {
     const { idsuscripcion } = req.body 
     try {
@@ -97,4 +110,4 @@ const modificarSuscripcion = async(req, res) => {
     }
 }
 
-module.exports = { getSuscripcion, crearSuscripcion, borrarSuscripcion, modificarSuscripcion }
+module.exports = { getSuscripcion, getSuscripciones, crearSuscripcion, borrarSuscripcion, modificarSuscripcion }

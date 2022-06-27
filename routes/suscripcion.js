@@ -5,8 +5,8 @@ const { getSuscripcion, getSuscripciones, crearSuscripcion, borrarSuscripcion, m
 const { jwtValidator } = require('../middleware/jwtvalidator')
 
 router
-    .get('/getUna', jwtValidator, getSuscripcion )
-    .get('/', jwtValidator, getSuscripciones )
+    .get('/', jwtValidator, getSuscripcion )
+    .post('/listaSuscripciones', jwtValidator, getSuscripciones )
     .post('/', crearSuscripcion)
     .delete('/', jwtValidator, borrarSuscripcion)
     .put('/', jwtValidator, modificarSuscripcion)

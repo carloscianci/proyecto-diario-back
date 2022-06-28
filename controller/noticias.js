@@ -2,7 +2,7 @@ const Noticia = require('../model/noticias')
 
 const getNoticias = async(req, res) => {
     try {
-        const listaNoticias = await Noticia.find().sort({ idtiponoticia: 1, titulo: 1} )
+        const listaNoticias = await Noticia.find().sort({ idtiponoticia: 1, destacada_seccion: -1, titulo: 1})
         res.json({
             resultado : true,
             listaNoticias
@@ -31,7 +31,7 @@ const getUnaNoticia = async(req, res) => {
 }
 
 const crearNoticia = async(req, res) => {
-    const {idtiponoticia, titulo, resumen, texto, urlImagen} = req.body 
+    const {idtiponoticia, titulo, resumen, texto, urlImagen, destacada_seccion, destacada_diario} = req.body 
 
     try
     {    
@@ -40,7 +40,9 @@ const crearNoticia = async(req, res) => {
             titulo,
             resumen,
             texto,
-            urlImagen
+            urlImagen,
+            destacada_seccion,
+            destacada_diario
         })
 
         await nuevaNoticia.save()
@@ -77,7 +79,7 @@ const borrarNoticia = async(req, res) => {
 }
 
 const modificarNoticia = async(req, res) => {
-    const  {idnoticia, idtiponoticia, titulo, resumen, texto, urlImagen} = req.body 
+    const  {idnoticia, idtiponoticia, titulo, resumen, texto, urlImagen, destacada_seccion, destacada_diario} = req.body 
 
     try {
         const resultado = await Noticia.findByIdAndUpdate(idnoticia, {
@@ -85,7 +87,9 @@ const modificarNoticia = async(req, res) => {
             titulo, 
             resumen,
             texto,
-            urlImagen
+            urlImagen,
+            destacada_seccion,
+            destacada_diario
         })
         
         if(resultado) {

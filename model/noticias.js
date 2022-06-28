@@ -6,7 +6,9 @@ const noticia = new Schema({
     titulo: String,
     resumen: String,
     texto: String,
-    urlImagen: String
+    urlImagen: String,
+    destacada_seccion: Number,
+    destacada_diario: Number
 })
 
 module.exports = model('Noticia', noticia)

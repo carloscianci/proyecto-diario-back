@@ -3,6 +3,19 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
 
+const getUsuarios = async(req, res) => {
+    try {
+        const listaUsuarios = await Usuario.find()
+        res.json({
+            resultado : true,
+            listaUsuarios
+        })
+        
+    } catch (error) {
+        console.error(error)
+    }
+}
+
 const getUsuario = async(req, res) => {
     const { idusuario } = req.body 
     try {
@@ -33,7 +46,8 @@ const crearUsuario = async(req, res) => {
             const nuevoUsuario = new Usuario({
                 nombre,
                 email,
-                clave : claveEncriptada
+                clave : claveEncriptada,
+                principal : 0
             })
     
             await nuevoUsuario.save()
@@ -76,7 +90,7 @@ const borrarUsuario = async(req, res) => {
 }
 
 const modificarUsuario = async(req, res) => {
-    const  {idusuario, nombre, email, clave} = req.body 
+    const  {idusuario, nombre, email, clave, principal} = req.body 
     const saltRound = 10
 
     const claveEncriptada = bcrypt.hashSync(clave, saltRound)
@@ -85,7 +99,8 @@ const modificarUsuario = async(req, res) => {
         const resultado = await Usuario.findByIdAndUpdate(idusuario, {
             nombre,
             email,
-            clave : claveEncriptada
+            clave : claveEncriptada,
+            principal
         })
         
         if(resultado) {
@@ -138,4 +153,4 @@ const login = async(req, res) => {
     }
 }
 
-module.exports = { getUsuario, crearUsuario, borrarUsuario, modificarUsuario, login }
+module.exports = { getUsuario, getUsuarios, crearUsuario, borrarUsuario, modificarUsuario, login }
